@@ -1,0 +1,1231 @@
+    <!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Room Booking - Luna Vista Resort</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .booking-card {
+
+            position: fixed;
+
+            background: #000000c9;
+
+            padding: 160px 40px 60px 40px;
+
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.584);
+
+            width: 90%;
+
+            max-width: 800px;
+
+            text-align: center;
+
+            max-height: 95vh;
+
+            overflow-y: auto;
+
+            left: 50%;
+
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+        }
+
+
+
+        .room-options {
+
+            position: relative;
+
+            display: flex;
+
+            bottom: 30px;
+
+            flex-wrap: wrap;
+
+            gap: 20px;
+
+            margin: 10px 0 20px 0;
+
+            justify-content: center;
+
+        }
+
+
+
+        .room-cards-container {
+
+            position: relative;
+
+            bottom: 5;
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 20px;
+
+            justify-content: center;
+
+            width: 100%;
+
+        }
+
+
+
+        .room-card {
+
+            background: rgba(255, 255, 255, 0.1);
+
+            border: 2px solid transparent;
+
+            border-radius: 10px;
+
+            padding: 20px;
+
+            width: 250px;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+
+        }
+
+
+
+        .room-card.selected {
+
+            border-color: #a4a4a4;
+
+            background: rgba(255, 255, 255, 0.2);
+
+        }
+
+
+  .brand h1 {
+
+            position: absolute;
+
+            transform: translateX(128%) translateY(-955%);
+            color: white;
+
+            margin-bottom: 10px;
+
+        }
+
+  .brand h4 {
+
+            position: absolute;
+
+            transform: translateX(55%) translateY(-195%);
+        
+            color: white;
+
+            margin-bottom: 10px;
+
+        }
+
+        .room-card h3 {
+
+            color: white;
+
+            margin-bottom: 10px;
+
+        }
+
+
+
+        .room-card p {
+
+            color: #e5e5e5;
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        .room-price {
+
+            color: #a4a4a4;
+
+            font-weight: bold;
+
+            margin-top: 10px;
+
+        }
+
+
+
+        .booking-form {
+
+position: relative;
+
+bottom: -155px;
+
+            margin-top: 30px;
+
+        }
+
+
+
+        .form-section {
+
+            margin-bottom: 30px;
+
+            text-align: left;
+
+        }
+
+
+
+        .form-section h2 {
+
+            position: relative;
+
+            bottom: 175px;
+
+            color: white;
+
+            margin-bottom: 15px;
+
+            font-size: 1.2rem;
+
+            cursor: move;
+
+            user-select: none;
+
+            position: relative;
+
+        }
+
+
+
+        .date-inputs {
+
+            display: flex;
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+
+        .date-inputs .input-group {
+
+            flex: 1;
+
+        }
+
+
+
+        .payment-form {
+
+            display: none;
+
+        }
+
+
+
+        .payment-form.show {
+
+            display: block;
+
+        }
+
+
+
+        .card-inputs {
+
+            position: relative;
+
+            bottom: -1000px;
+
+
+
+            gap: 15px;
+
+        }
+
+
+
+        .card-inputs .input-group {
+
+            flex: 1;
+
+        }
+
+
+
+        .total-price {
+
+            color: #a4a4a4;
+
+            font-size: 1.2rem;
+
+            font-weight: bold;
+
+            margin: 20px 0;
+
+        }
+
+
+
+        .booking-actions {
+
+            margin-top: 30px;
+
+        }
+
+
+
+        .book-btn {
+
+            width: 100%;
+
+            padding: 14px;
+
+            background-color: #a4a4a4;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 10px;
+
+            font-weight: 600;
+
+            font-size: 1rem;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+
+            margin-top: 20px;
+
+        }
+
+
+
+        .book-btn:hover {
+
+            background-color: #4f4f4f;
+
+            transform: scale(1.02);
+
+        }
+
+
+
+        .input-group {
+
+            position: relative;
+
+            margin-bottom: 25px;
+
+            text-align: left;
+
+        }
+
+
+
+        .input-group input {
+
+            width: 100%;
+
+            padding: 14px 12px;
+
+            border: 2px solid #e2e8f0;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 1rem;
+
+            transition: border-color 0.3s ease;
+
+            background: rgba(255, 255, 255, 0.1);
+
+            color: white;
+
+        }
+
+
+
+        .input-group input::placeholder {
+
+            color: transparent;
+
+        }
+
+
+
+        .input-group label {
+
+            position: absolute;
+
+            left: 12px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #94a3b8;
+
+            pointer-events: none;
+
+            transition: all 0.3s ease;
+
+            background: #000000c9;
+
+            padding: 0 4px;
+
+            font-size: 1rem;
+
+            z-index: 1;
+
+        }
+
+
+
+        .input-group input:focus + label,
+
+        .input-group input:not(:placeholder-shown) + label,
+
+        .input-group input[type="date"]:focus + label,
+
+        .input-group input[type="date"]:valid + label,
+
+        .input-group input[type="number"]:focus + label,
+
+        .input-group input[type="number"]:not([value=""]) + label,
+
+        .input-group input[type="text"]:focus + label,
+
+        .input-group input[type="text"]:not(:placeholder-shown) + label {
+
+            top: -8px;
+
+            font-size: 0.8rem;
+
+            color: #a7a7a7;
+
+            font-weight: 600;
+
+        }
+
+
+
+        .room-details {
+
+            display: none;
+
+            margin: 10px 0 20px 0;
+
+            padding: 20px;
+
+            background: rgba(255, 255, 255, 0.05);
+
+            border-radius: 10px;
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+        }
+
+
+
+        .room-details.show {
+
+            display: block;
+
+        }
+
+
+
+        .room-details h3 {
+
+            color: white;
+
+            margin-bottom: 15px;
+
+            font-size: 1.3rem;
+
+        }
+
+
+
+        .room-slideshow {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 250px;
+
+            overflow: hidden;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+
+        .room-slideshow img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: none;
+
+        }
+
+
+
+        .room-slideshow img.active {
+
+            display: block;
+
+        }
+
+
+
+        .slideshow-nav {
+
+            position: absolute;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            background: rgba(0, 0, 0, 0.5);
+
+            color: white;
+
+            border: none;
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+
+        .slideshow-nav.prev {
+
+            left: 10px;
+
+        }
+
+
+
+        .slideshow-nav.next {
+
+            right: 10px;
+
+        }
+
+
+
+        .slideshow-dots {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            margin-top: 10px;
+
+        }
+
+
+
+        .dot {
+
+            width: 10px;
+
+            height: 10px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.3);
+
+            cursor: pointer;
+
+            transition: background 0.3s ease;
+
+        }
+
+
+
+        .dot.active {
+
+            background: #a4a4a4;
+
+        }
+
+
+
+        .room-amenities {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+            gap: 15px;
+
+            margin-top: 20px;
+
+        }
+
+
+
+        .amenity-item {
+
+            display: flex;
+
+            align-items: center;
+
+            color: #e5e5e5;
+
+            font-size: 0.9rem;
+
+        }
+
+
+
+        .amenity-item::before {
+
+            content: "✓";
+
+            color: #a4a4a4;
+
+            font-weight: bold;
+
+            margin-right: 8px;
+
+        }
+
+
+
+        .logo-icon {
+
+            position: fixed;    
+
+            top: -435px;
+
+            left: -571px;
+            
+            scale: 0.05;
+
+        }  
+
+
+
+       
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="booking-card">
+
+       
+
+        <div class="brand">
+
+            <div class="logo-icon"> <img src="logo.png" alt="Luna Vista Resort Logo"> </div>
+
+            <h1>Room <span>Booking</span></h1>
+
+            <h4>Select your perfect stay at Luna Vista Resort</h4> 
+
+        </div>
+
+
+
+        <div class="room-options">
+
+            <div class="room-cards-container">
+
+                <div class="room-card" data-room="standard" data-price="150" data-beds="1 Queen Bed" data-size="32 m2" data-guests="1-2 Guests" data-bathrooms="1 Bathroom" data-amenities="City View, Free WiFi, Air Conditioning, Mini Fridge, Shower, Work Desk, Flat-screen TV, Coffee Maker" data-images="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400,h=250,fit=crop, https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400,h=250,fit=crop, https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=400,h=250,fit=crop">
+
+                    <h3>Standard Room</h3>
+
+                    <p>City View / Comfortable</p>
+
+                    <div class="room-price">$150/night</div>
+
+                </div>
+
+                <div class="room-card" data-room="premium" data-price="200" data-beds="1 King Bed" data-size="40 m2" data-guests="1-2 Guests" data-bathrooms="1 Bathroom" data-amenities="Partial Ocean View, Free WiFi, Air Conditioning, Mini Bar, Bathtub, Work Desk, Flat-screen TV, Coffee Maker, Room Service" data-images="https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?w=400,h=250,fit=crop, https://images.unsplash.com/photo-1566195992011-5f6b21e539aa?w=400,h=250,fit=crop, https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400,h=250,fit=crop">
+
+                    <h3>Premium Room</h3>
+
+                    <p>Partial Ocean View / Enhanced</p>
+
+                    <div class="room-price">$200/night</div>
+
+                </div>
+
+                <div class="room-card" data-room="deluxe" data-price="250" data-beds="1 King Bed" data-size="48 m2" data-guests="1-2 Guests" data-bathrooms="1 Bathroom" data-amenities="Ocean View, Free WiFi, Air Conditioning, Mini Bar, Bathtub, Balcony, Work Desk, Flat-screen TV, Coffee Maker, Room Service" data-images="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=400,h=250,fit=crop, https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400,h=250,fit=crop, https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=400,h=250,fit=crop">
+
+                    <h3>Deluxe Room</h3>
+
+                    <p>Ocean View / Spacious</p>
+
+                    <div class="room-price">$250/night</div>
+
+                </div>
+
+                <div class="room-card" data-room="junior" data-price="320" data-beds="1 King Bed + 1 Queen Sofa Bed" data-size="55 m2" data-guests="2-4 Guests" data-bathrooms="1 Bathroom" data-amenities="Ocean View, Free WiFi, Air Conditioning, Mini Bar, Jacuzzi Bath, Small Balcony, Work Desk, Flat-screen TV, Coffee Maker, Room Service, Premium Toiletries" data-images="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400,h=250,fit=crop, https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=400,h=250,fit=crop, https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400,h=250,fit=crop">
+
+                    <h3>Junior Suite</h3>
+
+                    <p>Ocean View / Suite</p>
+
+                    <div class="room-price">$320/night</div>
+
+                </div>
+
+                <div class="room-card" data-room="suite" data-price="400" data-beds="1 King Bed + 1 Sofa Bed" data-size="65 m2" data-guests="2-4 Guests" data-bathrooms="2 Bathrooms" data-amenities="Private Balcony, Ocean View, Free WiFi, Air Conditioning, Mini Bar, Jacuzzi Bath, Living Area, Work Desk, Flat-screen TV, Coffee Maker, Room Service, Premium Toiletries" data-images="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=400,h=250,fit=crop, https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400,h=250,fit=crop, https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=400,h=250,fit=crop">
+
+                    <h3>Executive Suite</h3>
+
+                    <p>Private Balcony / Luxury</p>
+
+                    <div class="room-price">$400/night</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="room-details" id="roomDetails">
+
+            <h3 id="roomTitle">Room Details</h3>
+
+            <div class="room-slideshow" id="roomSlideshow">
+
+                <img id="slideImage" src="" alt="Room image">
+
+                <button class="slideshow-nav prev" onclick="changeSlide(-1)">‹</button>
+
+                <button class="slideshow-nav next" onclick="changeSlide(1)">›</button>
+
+            </div>
+
+            <div class="slideshow-dots" id="slideshowDots"></div>
+
+            <div class="room-amenities" id="roomAmenities"></div>
+
+        </div>
+
+
+
+        <form class="booking-form" id="bookingForm">
+
+            <div class="form-section">
+
+                <h2>Booking Details</h2>
+
+                <div class="date-inputs">
+
+                    <div class="input-group">
+
+                        <input type="date" id="checkin" placeholder=" " required>
+
+                        <label for="checkin">Check-in Date</label>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <input type="date" id="checkout" placeholder=" " required>
+
+                        <label for="checkout">Check-out Date</label>
+
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+
+                    <input type="number" id="guests" min="1" max="4" value="1" placeholder=" " required>
+
+                    <label for="guests">Number of Guests</label>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-section payment-form" id="paymentForm">
+
+                <h2>Payment Information</h2>
+
+                <div class="input-group">
+
+                    <input type="text" id="cardName" placeholder=" " required>
+
+                    <label for="cardName">Cardholder Name</label>
+
+                </div>
+
+                <div class="input-group">
+
+                    <input type="text" id="cardNumber" placeholder=" " maxlength="19" required>
+
+                    <label for="cardNumber">Card Number</label>
+
+                </div>
+
+                <div class="card-inputs">
+
+                    <div class="input-group">
+
+                        <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" required>
+
+                        <label for="expiry">Expiry Date</label>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <input type="text" id="cvv" placeholder=" " maxlength="3" required>
+
+                        <label for="cvv">CVV</label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="total-price" id="totalPrice">Total: $0</div>
+
+        </form>
+
+
+
+        <div class="booking-actions">
+
+            <button type="button" class="book-btn" id="bookBtn">Proceed to Payment</button>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        let selectedRoom = null;
+
+        let selectedPrice = 0;
+
+        let currentSlide = 0;
+
+        let currentImages = [];
+
+
+
+        // Room selection
+
+        document.querySelectorAll('.room-card').forEach(card => {
+
+            card.addEventListener('click', function() {
+
+                document.querySelectorAll('.room-card').forEach(c => c.classList.remove('selected'));
+
+                this.classList.add('selected');
+
+                selectedRoom = this.dataset.room;
+
+                selectedPrice = parseInt(this.dataset.price);
+
+               
+
+                // Show room details
+
+                showRoomDetails(this);
+
+                calculateTotal();
+
+            });
+
+        });
+
+
+
+        // Show room details
+
+        function showRoomDetails(card) {
+
+            const roomTitle = card.querySelector('h3').textContent;
+
+            const roomType = card.querySelector('p').textContent;
+
+            const beds = card.dataset.beds;
+
+            const size = card.dataset.size;
+
+            const guests = card.dataset.guests;
+
+            const bathrooms = card.dataset.bathrooms;
+
+            const amenities = card.dataset.amenities.split(', ');
+
+            const images = card.dataset.images.split(', ');
+
+
+
+            // Update title
+
+            document.getElementById('roomTitle').textContent = roomTitle;
+
+
+
+            // Setup slideshow
+
+            currentImages = images;
+
+            currentSlide = 0;
+
+            updateSlideshow();
+
+
+
+            // Create dots
+
+            const dotsContainer = document.getElementById('slideshowDots');
+
+            dotsContainer.innerHTML = '';
+
+            images.forEach((_, index) => {
+
+                const dot = document.createElement('div');
+
+                dot.className = 'dot';
+
+                dot.onclick = () => goToSlide(index);
+
+                dotsContainer.appendChild(dot);
+
+            });
+
+            updateDots();
+
+
+
+            // Show amenities
+
+            const amenitiesContainer = document.getElementById('roomAmenities');
+
+            amenitiesContainer.innerHTML = `
+
+                <div class="amenity-item"><strong>${roomType}</strong></div>
+
+                <div class="amenity-item">${size}</div>
+
+                <div class="amenity-item">${guests}</div>
+
+                <div class="amenity-item">${beds}</div>
+
+                <div class="amenity-item">${bathrooms}</div>
+
+                ${amenities.map(amenity => `<div class="amenity-item">${amenity}</div>`).join('')}
+
+            `;
+
+
+
+            // Show details section
+
+            document.getElementById('roomDetails').classList.add('show');
+
+        }
+
+
+
+        // Slideshow functions
+
+        function updateSlideshow() {
+
+            const slideImage = document.getElementById('slideImage');
+
+            slideImage.src = currentImages[currentSlide];
+
+            updateDots();
+
+        }
+
+
+
+        function changeSlide(direction) {
+
+            currentSlide += direction;
+
+            if (currentSlide < 0) currentSlide = currentImages.length - 1;
+
+            if (currentSlide >= currentImages.length) currentSlide = 0;
+
+            updateSlideshow();
+
+        }
+
+
+
+        function goToSlide(index) {
+
+            currentSlide = index;
+
+            updateSlideshow();
+
+        }
+
+
+
+        function updateDots() {
+
+            const dots = document.querySelectorAll('.dot');
+
+            dots.forEach((dot, index) => {
+
+                dot.classList.toggle('active', index === currentSlide);
+
+            });
+
+        }
+
+
+
+        // Calculate total price
+
+        function calculateTotal() {
+
+            const checkin = new Date(document.getElementById('checkin').value);
+
+            const checkout = new Date(document.getElementById('checkout').value);
+
+           
+
+            if (checkin && checkout && checkout > checkin && selectedPrice > 0) {
+
+                const nights = Math.ceil((checkout - checkin) / (1000 * 60 * 60 * 24));
+
+                const total = nights * selectedPrice;
+
+                document.getElementById('totalPrice').textContent = `Total: $${total}`;
+
+            } else {
+
+                document.getElementById('totalPrice').textContent = 'Total: $0';
+
+            }
+
+        }
+
+
+
+        // Date validation
+
+        document.getElementById('checkout').addEventListener('change', function() {
+
+            const checkin = new Date(document.getElementById('checkin').value);
+
+            const checkout = new Date(this.value);
+
+           
+
+            if (checkout <= checkin) {
+
+                alert('Check-out date must be after check-in date.');
+
+                this.value = '';
+
+            }
+
+            calculateTotal();
+
+        });
+
+
+
+        // Form submission (now handled by button click)
+
+        document.getElementById('bookBtn').addEventListener('click', function(e) {
+
+            const bookBtn = this;
+
+
+
+            if (bookBtn.textContent === 'Proceed to Payment') {
+
+                if (!selectedRoom) {
+
+                    alert('Please select a room type.');
+
+                    return;
+
+                }
+
+                document.getElementById('paymentForm').classList.add('show');
+
+                bookBtn.textContent = 'Complete Booking';
+
+            } else {
+
+                // Mock payment processing
+
+                alert('Payment processed successfully! Your booking is confirmed.');
+
+                // In a real app, this would send data to server
+
+                document.getElementById('bookingForm').reset();
+
+                document.querySelectorAll('.room-card').forEach(c => c.classList.remove('selected'));
+
+                document.getElementById('paymentForm').classList.remove('show');
+
+                document.getElementById('roomDetails').classList.remove('show');
+
+                selectedRoom = null;
+
+                selectedPrice = 0;
+
+                document.getElementById('totalPrice').textContent = 'Total: $0';
+
+                bookBtn.textContent = 'Proceed to Payment';
+
+            }
+
+        });
+
+
+
+        // Card number formatting
+
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+
+            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || '';
+
+            e.target.value = formattedValue;
+
+        });
+
+
+
+        // Expiry date formatting
+
+        document.getElementById('expiry').addEventListener('input', function(e) {
+
+            let value = e.target.value.replace(/\D/g, '');
+
+            if (value.length >= 2) {
+
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+
+            }
+
+            e.target.value = value;
+
+        });
+
+
+
+        // Make h2 draggable
+
+        const draggableH2 = document.querySelector('.form-section h2');
+
+        let isDragging = false;
+
+        let dragOffsetX = 0;
+
+        let dragOffsetY = 0;
+
+
+
+        draggableH2.addEventListener('mousedown', function(e) {
+
+            isDragging = true;
+
+            dragOffsetX = e.clientX - draggableH2.offsetLeft;
+
+            dragOffsetY = e.clientY - draggableH2.offsetTop + 50; // Add 50px offset to move up
+
+            draggableH2.style.position = 'absolute';
+
+            draggableH2.style.zIndex = '1000';
+
+        });
+
+
+
+        document.addEventListener('mousemove', function(e) {
+
+            if (isDragging) {
+
+                draggableH2.style.left = (e.clientX - dragOffsetX) + 'px';
+
+                draggableH2.style.top = (e.clientY - dragOffsetY) + 'px';
+
+            }
+
+        });
+
+
+
+        document.addEventListener('mouseup', function() {
+
+            isDragging = false;
+
+        });
+
+    </script>
+
+</body>
+
+</html>
